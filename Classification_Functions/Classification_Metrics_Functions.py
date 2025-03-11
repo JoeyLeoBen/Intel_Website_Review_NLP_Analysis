@@ -811,11 +811,11 @@ class Metrics:
         plt.plot([0, index], [y_values[index], y_values[index]], c="g", linestyle="--")
 
         # Labels and legend
-        plt.xlabel("Total Observations")
-        plt.ylabel("Class 1 Observations")
-        plt.title("Cumulative Accuracy Profile")
+        plt.xlabel("total observations")
+        plt.ylabel("class 1 observations")
+        plt.title("cumulative accuracy profile")
         plt.legend(loc="lower right")
-        plt.text(index * 1.05, y_values[index] * 0.70, text)
+        plt.text(index * 1.05, y_values[index] * 0.80, text)
 
         plt.show()
 
