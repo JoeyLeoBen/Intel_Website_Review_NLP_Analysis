@@ -1,72 +1,58 @@
 import re
+from concurrent.futures import ProcessPoolExecutor
+from multiprocessing import cpu_count
 
 import pandas as pd
 import spacy
+from tqdm import tqdm
 
 from NLP_Functions.Stopwords_Loader import stop_words
 
-# Load NLP model
-nlp = spacy.load("en_core_web_sm")
+# Load NLP model once with disabled components for speed
+nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
 
 
 class Preprocessing:
     def __init__(self, text: str):
-        """
-        Initialize with raw text.
-
-        Args:
-            text (str): The input text to be processed.
-        """
+        """Initialize with raw text."""
         self.text = text
 
     def clean_text(self):
-        """
-        Cleans the text by removing HTML tags, special characters, extra spaces, and converting it to lowercase.
-
-        Returns:
-            Preprocessing: The updated instance with cleaned text.
-        """
-        self.text = re.sub(r"<.*?>", "", self.text)  # Remove HTML tags
-        self.text = re.sub(
-            r"[^a-zA-Z0-9\s]", "", self.text
-        )  # Remove special characters
-        self.text = re.sub(r"\s+", " ", self.text).strip()  # Remove extra spaces
-        self.text = self.text.lower()
-
+        """Removes HTML tags, URLs, mentions, special characters, repeated characters, and extra spaces."""
+        self.text = re.sub(r"<.*?>", "", self.text)  # Remove HTML
+        self.text = re.sub(r"http\S+|www\.\S+", "", self.text)  # Remove URLs
+        self.text = re.sub(r"@\w+", "", self.text)  # Remove mentions
+        self.text = re.sub(r"[^a-zA-Z0-9\s]", "", self.text)  # Remove special chars
+        self.text = re.sub(r"(.)\1{2,}", r"\1\1", self.text)  # Normalize repeated chars
+        self.text = (
+            re.sub(r"\s+", " ", self.text).strip().lower()
+        )  # Remove extra spaces & lowercase
         return self
 
     def remove_stopwords(self):
-        """
-        Removes stopwords from the text.
-
-        Returns:
-            Preprocessing: The updated instance with stopwords removed.
-        """
+        """Removes stopwords."""
         self.text = " ".join(
             [word for word in self.text.split() if word not in stop_words]
         )
-
         return self
 
     def lemmatize_text(self):
-        """
-        Lemmatizes the input text by converting words to their base forms.
-
-        Returns:
-            Preprocessing: The updated instance with lemmatized text.
-        """
+        """Lemmatizes the text to its base form."""
         doc = nlp(self.text)
         self.text = " ".join([token.lemma_ for token in doc])
+        return self
 
+    def remove_noise_tokens(self):
+        """Removes tokens that contain numbers or are shorter than 3 characters."""
+        tokens = self.text.split()
+        filtered_tokens = [
+            token for token in tokens if token.isalpha() and len(token) > 2
+        ]
+        self.text = " ".join(filtered_tokens)
         return self
 
     def get_text(self) -> str:
-        """
-        Retrieves the final processed text.
-
-        Returns:
-            str: The processed text after all applied transformations.
-        """
+        """Retrieves the final processed text."""
         return self.text
 
 
@@ -81,49 +67,53 @@ class TextProcessingPipeline:
         """
         self.df = df
         self.text_column = text_column
+        tqdm.pandas()  # Enable progress tracking
 
     def process(
-        self, clean: bool = True, lemmatize: bool = True, remove_stopwords: bool = True
+        self, clean=True, remove_stopwords=True, lemmatize=True, remove_noise=True
     ) -> pd.DataFrame:
         """
         Processes the text data through various preprocessing steps.
 
         Args:
-            clean (bool, optional): Whether to clean the text. Defaults to True.
-            lemmatize (bool, optional): Whether to lemmatize the text. Defaults to True.
-            remove_stopwords (bool, optional): Whether to remove stopwords. Defaults to True.
+            clean (bool): Whether to clean the text. Defaults to True.
+            remove_stopwords (bool): Whether to remove stopwords. Defaults to True.
+            lemmatize (bool): Whether to lemmatize the text. Defaults to True.
+            remove_noise (bool): Whether to remove noise (unwanted tokens). Defaults to True.
 
         Returns:
-            pd.DataFrame: The dataframe with an additional column containing processed text.
+            pd.DataFrame: The dataframe with an additional column for processed text.
         """
         processed_column = f"processed_{self.text_column}"
-        self.df[processed_column] = (
-            self.df[self.text_column]
-            .astype(str)
-            .apply(
-                lambda text: self._process_text(
-                    text, clean, remove_stopwords, lemmatize
+        self.df[processed_column] = self.df[self.text_column].astype(str)
+
+        # Use multiprocessing for faster processing
+        num_workers = min(cpu_count(), 4)  # Use up to 4 CPU cores
+        with ProcessPoolExecutor(max_workers=num_workers) as executor:
+            self.df[processed_column] = list(
+                tqdm(
+                    executor.map(
+                        self._process_text,
+                        self.df[processed_column],
+                        [clean] * len(self.df),
+                        [remove_stopwords] * len(self.df),
+                        [lemmatize] * len(self.df),
+                        [remove_noise] * len(self.df),
+                    ),
+                    total=len(self.df),
+                    desc="Processing Text",
                 )
             )
-        )
 
+        # Remove empty processed texts
+        self.df["review_length"] = self.df[processed_column].str.split().str.len()
+        self.df = self.df[self.df["review_length"] > 0].reset_index(drop=True)
         return self.df
 
     def _process_text(
-        self, text: str, clean: bool, lemmatize: bool, remove_stopwords: bool
+        self, text: str, clean, remove_stopwords, lemmatize, remove_noise
     ) -> str:
-        """
-        Applies text preprocessing steps conditionally.
-
-        Args:
-            text (str): The input text to be processed.
-            clean (bool): Whether to clean the text.
-            lemmatize (bool): Whether to lemmatize the text.
-            remove_stopwords (bool): Whether to remove stopwords.
-
-        Returns:
-            str: The fully processed text.
-        """
+        """Applies text preprocessing steps conditionally."""
         processor = Preprocessing(text)
         if clean:
             processor.clean_text()
@@ -131,5 +121,6 @@ class TextProcessingPipeline:
             processor.remove_stopwords()
         if lemmatize:
             processor.lemmatize_text()
-
+        if remove_noise:
+            processor.remove_noise_tokens()
         return processor.get_text()
