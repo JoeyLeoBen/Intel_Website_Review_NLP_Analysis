@@ -62,7 +62,7 @@ class TextProcessingPipeline:
         Initializes the text processing pipeline.
 
         Args:
-            df (pd.DataFrame): The dataframe containing text data.
+            df (pd.DataFrame): The data frame containing text data.
             text_column (str): The column name with the text to be processed.
         """
         self.df = df
@@ -82,7 +82,7 @@ class TextProcessingPipeline:
             remove_noise (bool): Whether to remove noise (unwanted tokens). Defaults to True.
 
         Returns:
-            pd.DataFrame: The dataframe with an additional column for processed text.
+            pd.DataFrame: The data frame with an additional column for processed text.
         """
         processed_column = f"processed_{self.text_column}"
         self.df[processed_column] = self.df[self.text_column].astype(str)
