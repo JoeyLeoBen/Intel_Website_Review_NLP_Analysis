@@ -42,7 +42,7 @@ The analysis reveals that customer reviews do have predictive power to predict c
 
 ## **Insights Deep Dive**
 
-![CAP Curve](./ReadMe_Images/CAP.JPG)
+![CAP Curve](./ReadMe_Images/CAP.png)
 
 ### **Cumulative Accuracy Profile (CAP) Insights**
 
