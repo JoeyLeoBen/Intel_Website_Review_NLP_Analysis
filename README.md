@@ -42,6 +42,17 @@ The analysis reveals that customer reviews do have predictive power to predict c
 
 ## **Insights Deep Dive**
 
+### Hypothesis
+
+#### Null Hypothesis (H₀)
+There is no predictive relationship between Intel's call center customer reviews and customer satisfaction.
+
+#### Alternative Hypothesis (H₁)
+There is a predictive relationship between Intel's call center customer reviews and customer satisfaction, meaning that call center reviews have a significant impact on predicting whether a customer is satisfied or not.
+
+#### Experiment Results
+We reject H₀ (null hypothesis) as the classification model has proven that there is a predictive relationship between Intel's call center customer reviews and customer satisfaction.
+
 ![CAP Curve](./ReadMe_Images/CAP.png)
 
 ### **Cumulative Accuracy Profile (CAP) Insights**
