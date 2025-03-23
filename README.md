@@ -53,9 +53,9 @@ There is a predictive relationship between Intel's call center customer reviews 
 #### Experiment Results
 We reject H₀ (null hypothesis) as the classification model has proven that there is a predictive relationship between Intel's call center customer reviews and customer satisfaction.
 
-![CAP Curve](./ReadMe_Images/CAP.png)
-
 ### **Cumulative Accuracy Profile (CAP) Insights**
+
+![CAP Curve](./ReadMe_Images/CAP.png)
 
 The CAP curve visually illustrates the NLP classification model’s effectiveness in identifying dissatisfied customers:
 
@@ -69,8 +69,6 @@ The CAP curve visually illustrates the NLP classification model’s effectivenes
 
 - **Top-Decile Performance:**  
   The highest-performing decile alone captures **21%** of dissatisfied customers, more than double the rate of random selection (10%), underscoring the model's precision.
-
-### **Decile Analysis (CAP Table)**
 
 ![CAP Table](./ReadMe_Images/CAP_Table.JPG)
 
