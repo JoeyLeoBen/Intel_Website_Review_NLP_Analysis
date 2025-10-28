@@ -10,7 +10,7 @@ The study aims to predict call center customer satisfaction by leveraging natura
 - [Executive Summary](#executive-summary)
 - [Insights Deep Dive](#insights-deep-dive)
 - [Data Analysis Jupyter Notebooks](#Data-Analysis-Jupyter-Notebooks)
-- [Recommendations](#recommendations)
+- [Recommendations](#recommendations--next-steps)
 - [Assumptions and Caveats](#assumptions-and-caveats)
 
 ---
@@ -80,23 +80,32 @@ The CAP curve visually illustrates the NLP classification model’s effectivenes
 
 ---
 
-## **Recommendations**
+## **Recommendations & Next Steps**
 
-### **1. Enhance NLP Model with Additional Data**  
+### **2. Model Improvement**  
+- The model may be improved by implimienting ensemble methods such as:
+
+  - **Stacking**  
+  Combines predictions from multiple base models using a meta-model that learns how to best blend their outputs.
+
+  - **Blending**  
+  Similar to stacking but uses a holdout validation set instead of cross-validation for training the meta-model.
+
+### **2. Enhance NLP Model with Additional Data**  
 - Incorporate a larger and more diverse dataset to improve the model's vocabulary coverage and predictive accuracy.
 - Continuously update the training dataset with recent customer interactions to maintain model relevance.
 
-### **2. Prioritize High-Risk Customers**
+### **3. Prioritize High-Risk Customers**
 - Utilize model predictions to proactively identify dissatisfied callers early in the interaction process.
 - Implement targeted intervention strategies such as follow-up calls or specialized training for call center agents handling high-risk interactions.
 
-### **3. Optimize Resource Allocation**
+### **4. Optimize Resource Allocation**
 - Direct attention and resources towards the top-performing deciles identified by the model to maximize customer satisfaction outcomes.
 
-### **4. Continuous Monitoring and Model Refinement**
+### **5. Continuous Monitoring and Model Refinement**
 - Regularly evaluate the model's performance metrics (e.g., F1 score, KS statistic) to identify opportunities for further improvement.
 
-### **5. Leverage Insights for Training Programs**
+### **6. Leverage Insights for Training Programs**
 - Translate predictive insights into actionable training materials for customer service representatives, addressing recurring themes linked to dissatisfaction.
 - Foster an ongoing improvement culture within call center teams by aligning performance metrics with model-driven insights.
 
@@ -106,20 +115,6 @@ The CAP curve visually illustrates the NLP classification model’s effectivenes
 
 - **Quality and Representativeness of Data:**
   - The accuracy and generalization of the NLP model are highly dependent on the quality, completeness, and representativeness of the training data. Any biases or gaps in the data can adversely impact predictions.
- 
-- The model may be improved by implimienting ensemble methods such as:
-
-  - **Bagging (Bootstrap Aggregating)**  
-  Trains multiple models on different random subsets of the data (with replacement) and averages their predictions to reduce variance.
-
-  - **Boosting**  
-  Builds models sequentially, where each new model corrects errors of the previous ones. Combines weak learners into a strong learner.
-
-  - **Stacking**  
-  Combines predictions from multiple base models using a meta-model that learns how to best blend their outputs.
-
-  - **Blending**  
-  Similar to stacking but uses a holdout validation set instead of cross-validation for training the meta-model.
 
 ---
 
