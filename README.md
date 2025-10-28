@@ -28,7 +28,13 @@ This analysis is particularly beneficial for **call center managers and customer
 
 ### **Key Findings**
 
-- The model demonstrated solid generalization performance, achieving a weighted F1 score of 0.74 on the k-fold training data and 0.76 on unseen test data, indicating effective predictive capability beyond the training set. The model may be improved by implimienting methods such as:
+- The model demonstrated solid generalization performance, achieving a weighted F1 score of 0.74 on the k-fold training data and 0.76 on unseen test data, indicating effective predictive capability beyond the training set.
+  
+- Once finalized, the model's F1 score significantly improves, as it leverages the full vocabulary. This suggests that incorporating additional data will further enhance its predictive performance.
+
+- The model correctly identified 80% of true positives within the first five deciles, making it 1.6 times more effective than random predictions.
+
+- The model may be improved by implimienting ensemble methods such as:
 
   - **Bagging (Bootstrap Aggregating)**  
   Trains multiple models on different random subsets of the data (with replacement) and averages their predictions to reduce variance.
@@ -41,11 +47,6 @@ This analysis is particularly beneficial for **call center managers and customer
 
   - **Blending**  
   Similar to stacking but uses a holdout validation set instead of cross-validation for training the meta-model.
-
-
-- Once finalized, the model's F1 score significantly improves, as it leverages the full vocabulary. This suggests that incorporating additional data will further enhance its predictive performance.
-
-- The model correctly identified 80% of true positives within the first five deciles, making it 1.6 times more effective than random predictions.
 
 ---
 
