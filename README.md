@@ -10,7 +10,7 @@ The study aims to predict call center customer satisfaction by leveraging natura
 - [Executive Summary](#executive-summary)
 - [Insights Deep Dive](#insights-deep-dive)
 - [Data Analysis Jupyter Notebooks](#Data-Analysis-Jupyter-Notebooks)
-- [Recommendations](#recommendations--next-steps)
+- [Recommendations](#recommendations-and-next-steps)
 - [Assumptions and Caveats](#assumptions-and-caveats)
 
 ---
@@ -80,7 +80,7 @@ The CAP curve visually illustrates the NLP classification model’s effectivenes
 
 ---
 
-## **Recommendations & Next Steps**
+## **Recommendations and Next Steps**
 
 ### **2. Model Improvement**  
 - The model may be improved by implimienting ensemble methods such as:
