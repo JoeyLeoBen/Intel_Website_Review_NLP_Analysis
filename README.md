@@ -33,21 +33,7 @@ This analysis is particularly beneficial for **call center managers and customer
 - Once finalized, the model's F1 score significantly improves, as it leverages the full vocabulary. This suggests that incorporating additional data will further enhance its predictive performance.
 
 - The model correctly identified 80% of true positives within the first five deciles, making it 1.6 times more effective than random predictions.
-
-- The model may be improved by implimienting ensemble methods such as:
-
-  - **Bagging (Bootstrap Aggregating)**  
-  Trains multiple models on different random subsets of the data (with replacement) and averages their predictions to reduce variance.
-
-  - **Boosting**  
-  Builds models sequentially, where each new model corrects errors of the previous ones. Combines weak learners into a strong learner.
-
-  - **Stacking**  
-  Combines predictions from multiple base models using a meta-model that learns how to best blend their outputs.
-
-  - **Blending**  
-  Similar to stacking but uses a holdout validation set instead of cross-validation for training the meta-model.
-
+- 
 ---
 
 ## **Insights Deep Dive**
@@ -120,6 +106,20 @@ The CAP curve visually illustrates the NLP classification model’s effectivenes
 
 - **Quality and Representativeness of Data:**
   - The accuracy and generalization of the NLP model are highly dependent on the quality, completeness, and representativeness of the training data. Any biases or gaps in the data can adversely impact predictions.
+ 
+- The model may be improved by implimienting ensemble methods such as:
+
+  - **Bagging (Bootstrap Aggregating)**  
+  Trains multiple models on different random subsets of the data (with replacement) and averages their predictions to reduce variance.
+
+  - **Boosting**  
+  Builds models sequentially, where each new model corrects errors of the previous ones. Combines weak learners into a strong learner.
+
+  - **Stacking**  
+  Combines predictions from multiple base models using a meta-model that learns how to best blend their outputs.
+
+  - **Blending**  
+  Similar to stacking but uses a holdout validation set instead of cross-validation for training the meta-model.
 
 ---
 
