@@ -20,7 +20,7 @@ Empowering Intel to proactively identify and engage dissatisfied customers will 
 
 By integrating machine learning's ability to serve in the moment of live interaction, Intel can greatly reduce dependence on expensive and time-intensive surveys.
 
-This analysis is particularly beneficial for **call center managers and customer experience teams** focused on elevating service quality and improving customer satisfaction. It provides:
+This analysis is particularly beneficial for call center managers and customer experience teams focused on elevating service quality and improving customer satisfaction. It provides:
 
 ---
 
@@ -55,21 +55,21 @@ We reject H₀ (null hypothesis) as the classification model has proven that the
 
 The CAP curve visually illustrates the NLP classification model’s effectiveness in identifying dissatisfied customers:
 
-- The **classifier** (blue line) significantly outperforms the **random model** (red dashed line), highlighting its predictive strength.
-- A robust **KS statistic of 50%** indicates strong differentiation between dissatisfied and satisfied callers, confirming the model's capability to effectively differentiate between classes.
+- The classifier (blue line) significantly outperforms the random model (red dashed line), highlighting its predictive strength.
+- A robust KS statistic of 50% indicates strong differentiation between dissatisfied and satisfied callers, confirming the model's capability to effectively differentiate between classes.
 
 ### **Key Performance Highlights**
 
 - **Efficient Early Identification:**  
-  The classifier identifies approximately **80%** of dissatisfied customers within the first five deciles. This demonstrates a considerable advantage, allowing Intel to efficiently prioritize resources.
+  The classifier identifies approximately 80% of dissatisfied customers within the first five deciles. This demonstrates a considerable advantage, allowing Intel to efficiently prioritize resources.
 
 - **Top-Decile Performance:**  
-  The highest-performing decile alone captures **21%** of dissatisfied customers, more than double the rate of random selection (10%), underscoring the model's precision.
+  The highest-performing decile alone captures 21% of dissatisfied customers, more than double the rate of random selection (10%), underscoring the model's precision.
 
 ![CAP Table](./ReadMe_Images/CAP_Table.JPG)
 
 ### **Interpretation**
-- The KS statistic peaks at the **5th decile (30.20%)**, representing the optimal differentiation between dissatisfied and satisfied customers.
+- The KS statistic peaks at the 5th decile (30.20%), representing the optimal differentiation between dissatisfied and satisfied customers.
 - Model accuracy naturally diminishes in the lower deciles, emphasizing the importance of prioritizing top-ranked predictions.
 
 ---
