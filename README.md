@@ -28,7 +28,20 @@ This analysis is particularly beneficial for **call center managers and customer
 
 ### **Key Findings**
 
-- The model demonstrated solid generalization performance, achieving a weighted F1 score of 0.74 on the k-fold training data and 0.76 on unseen test data, indicating effective predictive capability beyond the training set.
+- The model demonstrated solid generalization performance, achieving a weighted F1 score of 0.74 on the k-fold training data and 0.76 on unseen test data, indicating effective predictive capability beyond the training set. The model may be improved by implimienting methods such as:
+
+  - **Bagging (Bootstrap Aggregating)**  
+  Trains multiple models on different random subsets of the data (with replacement) and averages their predictions to reduce variance.
+
+  - **Boosting**  
+  Builds models sequentially, where each new model corrects errors of the previous ones. Combines weak learners into a strong learner.
+
+  - **Stacking**  
+  Combines predictions from multiple base models using a meta-model that learns how to best blend their outputs.
+
+  - **Blending**  
+  Similar to stacking but uses a holdout validation set instead of cross-validation for training the meta-model.
+
 
 - Once finalized, the model's F1 score significantly improves, as it leverages the full vocabulary. This suggests that incorporating additional data will further enhance its predictive performance.
 
@@ -95,7 +108,6 @@ The CAP curve visually illustrates the NLP classification model’s effectivenes
 
 ### **4. Continuous Monitoring and Model Refinement**
 - Regularly evaluate the model's performance metrics (e.g., F1 score, KS statistic) to identify opportunities for further improvement.
-- Integrate real-time feedback loops where caller feedback and model predictions continually enhance model effectiveness and accuracy.
 
 ### **5. Leverage Insights for Training Programs**
 - Translate predictive insights into actionable training materials for customer service representatives, addressing recurring themes linked to dissatisfaction.
