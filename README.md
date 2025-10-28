@@ -10,7 +10,7 @@ The study aims to predict call center customer satisfaction by leveraging natura
 - [Executive Summary](#executive-summary)
 - [Insights Deep Dive](#insights-deep-dive)
 - [Data Analysis Jupyter Notebooks](#Data-Analysis-Jupyter-Notebooks)
-- [Recommendations](#recommendations-and-next-steps)
+- [Recommendations and Next Steps](#recommendations-and-next-steps)
 - [Assumptions and Caveats](#assumptions-and-caveats)
 
 ---
